@@ -37,7 +37,7 @@ python setup.py py2app --resources youtrack
 
 # Configuring YouTrack Settings
 echo "Configuring YouTrack Settings"
-./youtrack_launcher.app/Contents/Resources/youtrack/bin/youtrack.sh configure \
+dist/YouTrackerLauncher.app/Contents/Resources/youtrack/bin/youtrack.sh configure \
         --listen-port=${PORT} \
         --data-dir="${BASEDIR}/data" \
         --logs-dir="${BASEDIR}/logs" \

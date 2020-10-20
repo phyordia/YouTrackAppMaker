@@ -6,15 +6,12 @@ rumps.debug_mode(True)
 
 class App(rumps.App):
     def __init__(self):
-        super(AwesomeStatusBarApp, self).__init__("YT")
+        super(App, self).__init__("YT")
         self.icon = "../Resources/youtrack/apps/youtrack/web/favicon.ico"
         self.menu = ["Toggle"]
         self.toggle = self.menu['Toggle']
         self.toggle.title = "Start"
-
-
-    def print_something(self, _):
-        rumps.alert(message='something', ok='YES!', cancel='NO!')
+        self.quit_button=None
 
 
     @rumps.clicked("Toggle")
@@ -33,10 +30,8 @@ class App(rumps.App):
             toggle.title = "Start"
 
 
-
-
-    @rumps.clicked('Clean Quit')
-    def clean_up_before_quit(_):
+    @rumps.clicked('Quit')
+    def clean_up_before_quit(self, _):
         rumps.notification("YouTrack", "Stopping YouTrack", "This may take a few seconds...")
         subprocess.run(["../Resources/youtrack/bin/youtrack.sh", "stop"],  stdout=sys.stdout, stderr=sys.stderr)
         rumps.notification("YouTrack", "Stopped", "")

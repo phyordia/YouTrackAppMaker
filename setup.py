@@ -7,7 +7,7 @@ Usage:
 
 from setuptools import setup
 
-APP = ['youtrack_launcher.py']
+APP = ['YouTrackerLauncher.py']
 DATA_FILES = []
 OPTIONS = {
     'iconfile': "images/youtrack.icns",
