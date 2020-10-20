@@ -33,7 +33,7 @@ find . -type d -iname "youtrack*" -maxdepth 1 -exec mv '{}' youtrack \;
 echo "Building App bundle"
 rm -rf build dist 
 python setup.py py2app --resources youtrack
-mv dist/youtrack_launcher.app .
+
 
 # Configuring YouTrack Settings
 echo "Configuring YouTrack Settings"
@@ -46,6 +46,6 @@ echo "Configuring YouTrack Settings"
 
 #cleanup
 echo 'Cleaning Up'
-rm -rf youtrack/ build/ dist/
+rm -rf youtrack/ build/
 
 echo 'Done'
