@@ -13,6 +13,9 @@ OPTIONS = {
     'iconfile': "images/youtrack.icns",
     'argv_emulation': True,
     'packages': ['rumps'],
+    'plist': {
+        'LSUIElement': True,
+    },
 }
 
 setup(
