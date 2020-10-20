@@ -42,6 +42,7 @@ dist/YouTrackerLauncher.app/Contents/Resources/youtrack/bin/youtrack.sh configur
         --data-dir="${BASEDIR}/data" \
         --logs-dir="${BASEDIR}/logs" \
         --backups-dir="${BASEDIR}/backups" \
+        --temp-dir="${BASEDIR}/temp" \
         --base-url="${BASEURL}:${PORT}"
 
 #cleanup
