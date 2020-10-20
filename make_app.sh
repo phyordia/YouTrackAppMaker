@@ -3,6 +3,7 @@
 PORT=8880
 BASEURL="http://localhost"
 BASEDIR=$HOME/.youtrack
+mkdir -p ${BASEDIR} 
 
 # Install Python dependencies
 echo "Installing Python dependencies"
@@ -22,7 +23,13 @@ fi
 # Unzip
 echo "Extacting Zip file"
 find . -iname "youtrack*.zip" -exec unzip {}  \;
-find . -type d -iname "youtrack*" -maxdepth 1 -exec mv '{}' youtrack \;
+find . -type d -iname "youtrack*" -maxdepth 1 -exec mv '{}' src \; 
+rm -rf ${BASEDIR}/src
+mv src ${BASEDIR}/  
+
+# Render python script with template
+echo "Rendering python template"
+sed "s|{{BASEDIR}}|$BASEDIR|g" YouTrackerLauncher_template.py > YouTrackerLauncher.py
 
 # Create Icon - Requires Inkscape installed. This should be uncommented for recreating icon set (images/youtrack.icns)
 #mkdir images
@@ -32,12 +39,12 @@ find . -type d -iname "youtrack*" -maxdepth 1 -exec mv '{}' youtrack \;
 # Build App bundle
 echo "Building App bundle"
 rm -rf build dist 
-python setup.py py2app --resources youtrack
+python setup.py py2app
 
 
 # Configuring YouTrack Settings
 echo "Configuring YouTrack Settings"
-dist/YouTrackerLauncher.app/Contents/Resources/youtrack/bin/youtrack.sh configure \
+${BASEDIR}/src/bin/youtrack.sh configure \
         --listen-port=${PORT} \
         --data-dir="${BASEDIR}/data" \
         --logs-dir="${BASEDIR}/logs" \
@@ -47,6 +54,6 @@ dist/YouTrackerLauncher.app/Contents/Resources/youtrack/bin/youtrack.sh configur
 
 #cleanup
 echo 'Cleaning Up'
-rm -rf youtrack/ build/
+rm -rf youtrack/ build/ YouTrackerLauncher.py
 
 echo 'Done'
